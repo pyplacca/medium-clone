@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "contact-list",
-    "slug": "contact-list",
+    "name": "medium-clone",
+    "slug": "medium-clone",
     "version": "1.0.0",
+    "sdkVersion": "39.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
