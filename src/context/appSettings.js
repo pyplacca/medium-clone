@@ -10,8 +10,8 @@ function settingsReducer (state, action) {
 
 	switch (type) {
 
-		case 'DARK_MODE_ON':
-			console.log({dark_mode: payload});
+		case 'DARK_MODE':
+			// console.log({dark_mode: payload});
 			return {
 				...state,
 				darkMode: payload
@@ -22,12 +22,12 @@ function settingsReducer (state, action) {
 export const SettingsContext = createContext();
 
 export default function SettingsProvider (props) {
-	const [settingsState, settingsDispatch] = useReducer(settingsReducer, initialState);
+	const [settings, settingsDispatch] = useReducer(settingsReducer, initialState);
 
 	return (
 		<SettingsContext.Provider
 			value={{
-				settingsState,
+				settings,
 				settingsDispatch
 			}}
 		>
