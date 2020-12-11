@@ -3,6 +3,11 @@ import React, { createContext, useReducer } from 'react';
 
 const initialState = {
 	darkMode: false,
+	wifiOnlyBackgroundDataUsage: true,
+	imageLoadingDisabled: false,
+	connectedToTwitter: false,
+	connectedToFacebook: false,
+	beta: null, // other values: 'beta' or 'classic'
 };
 
 function settingsReducer (state, action) {
@@ -11,11 +16,16 @@ function settingsReducer (state, action) {
 	switch (type) {
 
 		case 'DARK_MODE':
-			// console.log({dark_mode: payload});
 			return {
 				...state,
 				darkMode: payload
 			};
+
+		case 'BETA':
+			return {
+				...state,
+				beta: payload,
+			}
 	};
 };
 
