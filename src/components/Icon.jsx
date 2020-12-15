@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Image, StyleSheet } from 'react-native';
-import SettingsContext from '../context/appSettings';
+import { AppContext } from '../context';
 
 
 const icons = {
@@ -28,33 +28,21 @@ const icons = {
 };
 
 
-function Icon ({name, size, accent, type, style}) {
+function Icon ({name, size=30, accent, type, style={}}) {
 	// accent: dark or light (mode)
 	// type: filled or outlined
-	console.log([accent, name, type].join('-') + '.png');
-
-	const { settings: {darkMode} } = useContext(appSettings);
+	const { state: {darkMode} } = useContext(AppContext);
 
 	return (
 		<Image
 			source={icons[darkMode ? 'dark' : 'light'][name][type]}
-			style={{ height: size, ...style }}
+			style={{
+				height: size,
+				...style,
+				resizeMode: 'contain'
+			}}
 		/>
 	)
-};
-
-Icon.propTypes = {
-	name: PropTypes.string.isRequired,
-	size: PropTypes.number,
-	// accent: PropTypes.string,
-	type: PropTypes.string.isRequired,
-	style: PropTypes.object,
-};
-
-Icon.defaultProps = {
-	size: 25,
-	// accent: 'light',
-	style: {}
 };
 
 export default Icon;
