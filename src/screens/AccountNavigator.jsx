@@ -1,55 +1,11 @@
 import React, { useLayoutEffect } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
-import StackNavigator from '../components/StackNavigator'
-import Account from './account';
-import StoriesNavigator from './account/StoriesNavigator';
-import SettingsNavigator from './account/SettingsNavigator';
-
-
-const horizontalCardStyle = {
-	gestureEnabled: true,
-	gestureDirection: 'horizontal',
-	gestureResponseDistance: {
-		horizontal: 250
-	},
-	cardStyle: {
-		// shadowColor: '#000',
-		// shadowOpacity: 1,
-		shadowRadius: 7,
-		// shadowOffset: {
-  //     width: -3,
-  //     height: 0,
-  //   },
-    elevation: 5,
-	},
-	cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
-}
-
-const screens = [
-	{
-		name: 'account',
-		component: Account,
-		// options: {}
-	},
-	{
-		name: 'stories',
-		component: StoriesNavigator,
-		// options: {}
-			...horizontalCardStyle
-	},
-	{
-		name: 'settings',
-		component: SettingsNavigator,
-		options: {
-			// mode: 'modal',
-			...horizontalCardStyle
-		}
-	},
-]
+import { StackNavigator } from '../components/navigators';
+import Account, { SettingsNavigator, StoriesNavigator } from './account';
+import { horizontalCardStyle } from '../config';
+import { StackHeader } from '../components/headers'
 
 export default function AccountNavigator (props) {
-
 	// hide tab bar when user navigates to screens specified in "screenHidesTabBar"
 	useLayoutEffect(() => {
 		const screenHidesTabBar = ['settings', 'stories'];
@@ -59,16 +15,41 @@ export default function AccountNavigator (props) {
 		if (screenHidesTabBar.includes(routeName)) {
 			tabBarVisible = false
 		}
-		console.log({'Navigation options -> ': props.navigation.options})
 		props.navigation.setOptions({tabBarVisible})
 	}, [props.navigation, props.route])
 
 	return (
 		<StackNavigator
 			screenOptions={{
-				headerShown: false,
+				// headerShown: false,
 			}}
-			screens={screens}
+			screens={[
+				{
+					name: 'account',
+					component: Account,
+					options: {
+						headerShown: false
+					}
+				},
+				{
+					name: 'stories',
+					component: StoriesNavigator,
+					options: {
+						...horizontalCardStyle,
+						gestureEnabled: false,
+						header: props => <StackHeader title='Stories' {...props}/>
+					}
+				},
+				{
+					name: 'settings',
+					component: SettingsNavigator,
+					options: {
+						// mode: 'modal',
+						...horizontalCardStyle,
+						headerShown: false
+					}
+				},
+			]}
 		/>
 	)
 };
