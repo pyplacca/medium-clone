@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Pressable } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { SettingsContext } from './context/appSettings';
-import { Navigation } from './components';
+import { AppContext } from './context';
+import { Navigation, Icon, UserIcon } from './components';
 import { HomeNavigator, Activity, AccountNavigator } from './screens';
 import { measure, theme } from './config';
 
@@ -31,16 +32,16 @@ const Tab = createBottomTabNavigator();
 
 function AppNavigator (props) {
 
-	const { settings: {darkMode} } = useContext(SettingsContext);
+	const { state: {darkMode} } = useContext(AppContext);
 	const { background: bg, foreground: fg } = theme[darkMode ? 'dark' : 'light'].colors;
 
 
 	return (
 		<Navigation>
 			<Tab.Navigator
-				sceneContainerStyle={{backgroundColor: bg.primary}}
+				// sceneContainerStyle={{backgroundColor: bg.primary}}
 				tabBarOptions={{
-					// showLabel: false,
+					showLabel: false,
 					// labelPosition: "beside-icon",
 					style: {
 						backgroundColor: bg.primary,
@@ -54,41 +55,43 @@ function AppNavigator (props) {
 					},
 					labelStyle: {
 						fontSize: 14,
-						// color: fg.primary
 					},
-					activeTintColor: fg.tetiary,
-					inActiveTintColor: fg.primary,
-					// activeBackgroundColor: bg.secondary
-					tabBarButton
+					// activeTintColor: fg.tetiary,
+					// inActiveTintColor: fg.primary,
 				}}
+				screenOptions={{ tabBarButton }}
 			>
 				<Tab.Screen
 					name="home"
 					component={HomeNavigator}
 					options={{
-						tabBarLabel: 'Home',
-						// tabBarAccessibilityLabel: 'Home',
-						// tabBarButton
-						tabBarIcon: params => getIcon({name: 'home', ...params})
+						tabBarAccessibilityLabel: 'Home',
+						tabBarIcon: params => getIcon({name: 'home', ...params}),
 					}}
 				/>
 				<Tab.Screen
 					name="activity"
 					component={Activity}
 					options={{
-						tabBarLabel: 'Activity',
-						// tabBarAccessibilityLabel: 'Activity',
-						// tabBarButton
-						tabBarIcon: params => getIcon({name: 'activity', ...params})
+						tabBarAccessibilityLabel: 'Activity',
+						tabBarIcon: ({focused}) => (
+							<MaterialCommunityIcons
+								name={focused ? 'bell' : 'bell-outline'}
+								size={30}
+								color={focused ? fg.primary : fg.secondary}
+							/>
+						)
 					}}
 				/>
 				<Tab.Screen
 					name="account"
 					component={AccountNavigator}
 					options={{
-						// tabBarAccessibilityLabel: 'Account',
+						tabBarAccessibilityLabel: 'Account',
 						tabBarLabel: 'Account',
-						// tabBarButton
+						tabBarIcon: params => (
+							<UserIcon bordered={params.focused}/>
+						)
 					}}
 				/>
 			</Tab.Navigator>
