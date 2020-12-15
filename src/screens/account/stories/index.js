@@ -1,17 +1,9 @@
-import React from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import Drafts from './Drafts';
+import Public from './Public';
+import Unlisted from './Unlisted';
 
-
-function Stories (props) {
-	return (
-		<ScrollView>
-
-		</ScrollView>
-	)
-};
-
-const styles = StyleSheet.create({
-
-});
-
-export default Stories;
+export {
+	Drafts,
+	Public,
+	Unlisted,
+}

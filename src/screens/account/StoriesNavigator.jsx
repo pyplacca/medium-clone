@@ -1,12 +1,17 @@
 import React from 'react';
-import { ScrollView, Text } from 'react-native';
+import { TopTabNavigator } from '../../components/navigators';
+import { Drafts, Public, Unlisted } from './stories';
 
 
-function StoriesNavigator () {
+function StoriesNavigator ({navigation}) {
 	return (
-		<ScrollView>
-			<Text>Stories</Text>
-		</ScrollView>
+		<TopTabNavigator
+			screens={[
+				{ name: 'drafts', component: Drafts },
+				{ name: 'public', component: Public },
+				{ name: 'unlisted', component: Unlisted },
+			]}
+		/>
 	)
 };
 
