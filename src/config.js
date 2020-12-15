@@ -1,3 +1,5 @@
+import { CardStyleInterpolators, TransitionPresets } from '@react-navigation/stack';
+
 export const theme = {
 	dark: {
 		colors: {
@@ -55,4 +57,23 @@ export const screenModalOptions = {
       }),
     },
   }),
-}
+};
+
+export const horizontalCardStyle = {
+	gestureEnabled: true,
+	gestureDirection: 'horizontal',
+	gestureResponseDistance: {
+		horizontal: 250
+	},
+	cardStyle: {
+		shadowColor: '#000',
+		shadowOpacity: .3,
+		shadowRadius: 7,
+		shadowOffset: {
+      width: -3,
+      height: 0,
+    },
+    elevation: 5,
+	},
+	cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+};
