@@ -1,33 +1,62 @@
-import React from 'react';
-import { StackNavigator } from '../components'
-import ReadingList from './home/ReadingList';
-import Search from './home/Search';
-import Home from './home';
+import React, { useContext, useLayoutEffect } from 'react';
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { StackNavigator } from '../components/navigators';
+import { StackHeader } from '../components/headers';
+import Home, { ReadingListNavigator, Search } from './home';
+import { horizontalCardStyle } from '../config';
+import { AppContext } from '../context';
 
 
-const screens = [
-	{
-		name: 'home',
-		component: Home,
-		// options: {}
-	},
-	{
-		name: 'reading_list',
-		component: ReadingList,
-		// options: {}
-	},
-	{
-		name: 'search',
-		component: Search,
-		// options: {}
-	},
-]
+function HomeNavigator ({navigation, route}) {
+	useLayoutEffect(() => {
+		const screenHidesTabBar = ['reading_list', 'search'],
+		routeName = getFocusedRouteNameFromRoute(route);
+		let tabBarVisible = true
+		if (screenHidesTabBar.includes(routeName)) {
+			tabBarVisible = false
+		}
+		navigation.setOptions({tabBarVisible})
+	}, [navigation, route])
 
-export default function HomeNavigator () {
+	const { state } = useContext(AppContext);
+
 	return (
 		<StackNavigator
-			screenOptions={{headerShown: false}}
-			screens={screens}
+			screens={[
+				{
+					name: 'home',
+					component: Home,
+					options: {
+						headerShown: false
+					}
+				},
+				{
+					name: 'reading_list',
+					component: ReadingListNavigator,
+					options: {
+						...horizontalCardStyle,
+						gestureEnabled: false,
+						header: props => (
+							<StackHeader
+								title='Reading List'
+								centerTitle
+								showBorder
+								accent={state.darkMode ? 'dark' : 'light'}
+								{...props}
+							/>
+						)
+					}
+				},
+				{
+					name: 'search',
+					component: Search,
+					options: {
+						headerShown: false
+					}
+				},
+			]}
 		/>
 	)
 };
+
+export default HomeNavigator;
