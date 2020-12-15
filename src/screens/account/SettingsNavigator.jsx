@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { StackNavigator } from '../../components';
-import { screenModalOptions } from '../../config';
-import Settings from './settings';
-import DarkMode from './settings/DarkMode';
+import { StackNavigator } from '../../components/navigators';
+import { screenModalOptions, horizontalCardStyle } from '../../config';
+import Settings, { DarkMode, Beta } from './settings';
 
 
 
@@ -12,6 +11,13 @@ const screens = [
 		name: 'settings',
 		component: Settings,
 		// options: {}
+	},
+	{
+		name: 'beta',
+		component: Beta,
+		options: {
+			...horizontalCardStyle
+		}
 	},
 	// {
 	// 	name: 'dark_mode',
