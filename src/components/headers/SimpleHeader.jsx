@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { SettingsContext } from '../../context/appSettings';
+import { AppContext } from '../../context';
 import { measure, theme } from '../../config';
 
 
 function SimpleHeader ({title, style, children, ...props}) {
 
-	const { settings } = useContext(SettingsContext);
-	const { background: bg, foreground: fg } = theme[settings.darkMode ? 'dark' : 'light'].colors;
+	const { darkMode } = useContext(AppContext).state;
+	const { background: bg, foreground: fg } = theme[darkMode ? 'dark' : 'light'].colors;
 
 	return (
 		<View
