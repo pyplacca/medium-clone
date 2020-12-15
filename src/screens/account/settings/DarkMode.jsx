@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { View, Text } from 'react-native';
-import { SettingsContext } from '../../../context/appSettings';
+import { AppContext } from '../../../context';
 import { theme } from '../../../config';
 
 
 function DarkMode () {
-	const {settings, settingsDispatch} = useContext(SettingsContext);
+	const {state, dispatch} = useContext(AppContext);
 	const { colors } = theme[settings.darkMode ? 'dark' : 'light']
 
 	const textStyle = {
