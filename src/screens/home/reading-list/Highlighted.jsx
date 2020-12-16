@@ -1,5 +1,6 @@
 import React from 'react';
 import { Screen } from '../../../components/stories';
+import { UnderDevelopment } from '../../../components';
 
 
 function Highlighted () {
@@ -7,7 +8,7 @@ function Highlighted () {
 		<Screen
 			placeholderText="You haven't highlighted any stories yet"
 		>
-
+			<UnderDevelopment/>
 		</Screen>
 	)
 };

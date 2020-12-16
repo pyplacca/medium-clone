@@ -1,11 +1,16 @@
 import React from 'react';
-import { ScrollView, Text, StyleSheet } from 'react-native'
+import { ScrollView, Pressable, Text, StyleSheet } from 'react-native';
+import { UnderDevelopment } from '../../components'
 
 
-export default function Search () {
+export default function Search ({navigation}) {
 	return (
-		<ScrollView>
-			<Text>Search</Text>
+		<ScrollView
+			contentContainerStyle={{
+				flex: 1
+			}}
+		>
+			<UnderDevelopment onBack={() => navigation.goBack()}/>
 		</ScrollView>
 	)
 }
