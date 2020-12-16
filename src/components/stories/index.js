@@ -1,2 +1,2 @@
-export { default as Placeholder } from './Placeholder.jsx';
-export { default as Screen } from './Screen.jsx';
+export { default as Placeholder } from './Placeholder';
+export { default as Screen } from './Screen';

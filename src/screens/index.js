@@ -1,6 +1,6 @@
-import Activity from './Activity.jsx';
-import AccountNavigator from './AccountNavigator.jsx';
-import HomeNavigator from './HomeNavigator.jsx';
+import Activity from './Activity';
+import AccountNavigator from './AccountNavigator';
+import HomeNavigator from './HomeNavigator';
 
 export {
 	Activity,

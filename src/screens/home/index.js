@@ -440,5 +440,5 @@ const styles = StyleSheet.create({
 })
 
 export default Home;
-export {default as ReadingListNavigator} from './ReadingListNavigator.jsx';
-export {default as Search} from './Search.jsx';
+export {default as ReadingListNavigator} from './ReadingListNavigator';
+export {default as Search} from './Search';

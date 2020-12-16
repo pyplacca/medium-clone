@@ -7,8 +7,8 @@ import { ButtonRow, Gap, CheckBox } from '../../../components';
 import { AppContext } from '../../../context';
 import { theme, measure } from '../../../config';
 // screens
-import DarkMode from './DarkMode.jsx';
-import Beta from './Beta.jsx';
+import DarkMode from './DarkMode';
+import Beta from './Beta';
 
 
 function Settings ({navigation, route}) {

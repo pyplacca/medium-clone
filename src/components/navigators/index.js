@@ -1,5 +1,5 @@
-import TopTabNavigator from './TopTabNavigator.jsx';
-import StackNavigator from './StackNavigator.jsx';
+import TopTabNavigator from './TopTabNavigator';
+import StackNavigator from './StackNavigator';
 
 export {
 	TopTabNavigator,

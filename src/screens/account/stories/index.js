@@ -1,6 +1,6 @@
-import Drafts from './Drafts.jsx';
-import Public from './Public.jsx';
-import Unlisted from './Unlisted.jsx';
+import Drafts from './Drafts';
+import Public from './Public';
+import Unlisted from './Unlisted';
 
 export {
 	Drafts,
