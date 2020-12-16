@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { FlatList, ScrollView, Text, RefreshControl } from 'react-native';
-import Placeholder from './Placeholder';
+import Placeholder from './Placeholder.jsx';
 import { AppContext } from '../../context';
 import { theme, measure } from '../../config';
 

@@ -209,5 +209,5 @@ const styles = StyleSheet.create({
 })
 
 export default Account;
-export {default as SettingsNavigator} from './SettingsNavigator';
-export {default as StoriesNavigator} from './StoriesNavigator';
+export {default as SettingsNavigator} from './SettingsNavigator.jsx';
+export {default as StoriesNavigator} from './StoriesNavigator.jsx';

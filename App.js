@@ -4,7 +4,7 @@ import { StatusBar } from 'react-native';
 import { Asset } from 'expo-asset';
 import AppLoading from 'expo-app-loading';
 import AppProvider from './src/context';
-import AppNavigator from './src/AppNavigator';
+import AppNavigator from './src/AppNavigator.jsx';
 
 export default function App () {
 	// load fonts

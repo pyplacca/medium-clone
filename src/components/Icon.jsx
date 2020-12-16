@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { Image, StyleSheet } from 'react-native';
 import { AppContext } from '../context';
 

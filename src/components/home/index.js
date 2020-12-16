@@ -1,5 +1,5 @@
-import Featured from './Featured';
-import StoryCard from './StoryCard';
+import Featured from './Featured.jsx';
+import StoryCard from './StoryCard.jsx';
 
 export {
 	Featured,

@@ -1,7 +1,7 @@
-import Saved from './Saved';
-import Highlighted from './Highlighted';
-import RecentlyViewed from './RecentlyViewed';
-import Archived from './Archived';
+import Saved from './Saved.jsx';
+import Highlighted from './Highlighted.jsx';
+import RecentlyViewed from './RecentlyViewed.jsx';
+import Archived from './Archived.jsx';
 
 export {
 	Saved,
