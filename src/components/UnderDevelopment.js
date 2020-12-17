@@ -14,7 +14,7 @@ export default function UnderDevelopment({onBack, style={}}) {
 				flex: 1,
 				alignItems: 'center',
 				justifyContent: 'center',
-				padding: 100,
+				padding: 50,
 				...style
 			}}
 		>
