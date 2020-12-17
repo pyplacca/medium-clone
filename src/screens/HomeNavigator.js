@@ -3,7 +3,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { StackNavigator } from '../components/navigators';
 import { StackHeader } from '../components/headers';
 import Home, { ReadingListNavigator, Search } from './home';
-import { horizontalCardStyle } from '../config';
+import { horizontalCardStyle, themeMode } from '../config';
 import { AppContext } from '../context';
 
 
@@ -41,7 +41,7 @@ function HomeNavigator ({navigation, route}) {
 								title='Reading List'
 								centerTitle
 								showBorder
-								accent={state.darkMode ? 'dark' : 'light'}
+								accent={themeMode[state.darkMode]}
 								{...props}
 							/>
 						)

@@ -5,7 +5,7 @@ import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { SimpleHeader } from '../../../components/headers';
 import { ButtonRow, Gap, CheckBox } from '../../../components';
 import { AppContext } from '../../../context';
-import { theme, measure } from '../../../config';
+import { theme, measure, themeMode } from '../../../config';
 // screens
 import DarkMode from './DarkMode';
 import Beta from './Beta';
@@ -14,7 +14,7 @@ import Beta from './Beta';
 function Settings ({navigation, route}) {
 
 	const { state, dispatch } = useContext(AppContext);
-	const { foreground: fg, background: bg } = theme[state.darkMode ? 'dark' : 'light'].colors
+	const { foreground: fg, background: bg } = theme[themeMode[state.darkMode]].colors
 
 	const sds = {
 		emphasis: { color: fg.tetiary },

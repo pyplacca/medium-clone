@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { FlatList, ScrollView, Text, RefreshControl } from 'react-native';
 import Placeholder from './Placeholder';
 import { AppContext } from '../../context';
-import { theme, measure } from '../../config';
+import { theme, measure, themeMode } from '../../config';
 
 
 function Screen ({
@@ -13,7 +13,7 @@ function Screen ({
 	children
 }) {
 	const { darkMode } = useContext(AppContext).state;
-	const { colors } = theme[darkMode ? 'dark' : 'light'];
+	const { colors } = theme[themeMode[darkMode]];
 
 	const [refreshing, setRefreshing] = useState(false);
 

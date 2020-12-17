@@ -2,15 +2,14 @@ import React, { useContext } from 'react';
 import { TopTabNavigator } from '../../components/navigators';
 import { Saved, Archived, Highlighted, RecentlyViewed } from './reading-list';
 import { AppContext } from '../../context';
-import { theme } from '../../config';
+import { theme, themeMode } from '../../config';
 
 
 function ReadingListNavigator ({navigation, route}) {
 	const { state } = useContext(AppContext);
-	const accent = state.darkMode ? 'dark' : 'light'
 	return (
 		<TopTabNavigator
-			accent={accent}
+			accent={themeMode[state.darkMode]}
 			showBorder
 			screens={[
 				{ name: 'saved', component: Saved },

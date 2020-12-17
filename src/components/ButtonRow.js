@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { View, Pressable, Text } from 'react-native';
 import { AppContext } from '../context';
-import { theme, measure } from '../config';
+import { theme, measure, themeMode } from '../config';
 
 
 function ButtonRow ({text, style, textStyle, children, ...props}) {
 
 	const { darkMode } = useContext(AppContext).state;
-	const { colors } = theme[darkMode ? 'dark' : 'light'];
+	const { colors } = theme[themeMode[darkMode]];
 
 	return (
 		<Pressable

@@ -3,13 +3,13 @@ import { View, Text } from 'react-native';
 import { Gap, ButtonRow, RadioButton } from '../../../components';
 import { StackHeader } from '../../../components/headers';
 import { AppContext } from '../../../context';
-import { theme } from '../../../config';
+import { theme, themeMode } from '../../../config';
 
 
 function Beta ({navigation}) {
 
 	const { state, dispatch: dispatch } = useContext(AppContext);
-	const { colors } = theme[state.darkMode ? 'dark' : 'light'];
+	const { colors } = theme[themeMode[state.darkMode]];
 
 	const toggleBeta = type => {
 		dispatch({

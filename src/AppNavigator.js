@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppContext } from './context';
 import { Navigation, Icon, UserIcon } from './components';
 import { HomeNavigator, Activity, AccountNavigator } from './screens';
-import { measure, theme } from './config';
+import { measure, theme, themeMode } from './config';
 
 
 function tabBarButton (props) {
@@ -33,7 +33,7 @@ const Tab = createBottomTabNavigator();
 function AppNavigator (props) {
 
 	const { state: {darkMode} } = useContext(AppContext);
-	const { background: bg, foreground: fg } = theme[darkMode ? 'dark' : 'light'].colors;
+	const { background: bg, foreground: fg } = theme[themeMode[darkMode]].colors;
 
 
 	return (

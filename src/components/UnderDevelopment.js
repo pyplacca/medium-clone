@@ -2,18 +2,19 @@ import React, { useContext } from 'react';
 import { Entypo } from '@expo/vector-icons';
 import { View, Pressable, Text } from 'react-native';
 import { AppContext } from '../context';
-import { theme } from '../config';
+import { theme, themeMode } from '../config';
 
 
 export default function UnderDevelopment({onBack, style={}}) {
 	const { darkMode } = useContext(AppContext).state;
-	const { foreground } = theme[darkMode ? 'dark' : 'light'].colors;
+	const { foreground } = theme[themeMode[darkMode]].colors;
 	return (
 		<View
 			style={{
 				flex: 1,
 				alignItems: 'center',
 				justifyContent: 'center',
+				padding: 100,
 				...style
 			}}
 		>
@@ -28,19 +29,19 @@ export default function UnderDevelopment({onBack, style={}}) {
 				<Text>This screen is currently under development.{'\n'}</Text>
 				<Text>Kindly check back in a few days.</Text>
 			</Text>
-			<Pressable
-				onPress={onBack}
-				style={{
-					marginTop: 25
-				}}
-				android_ripple={{
-					color: foreground.secondary,
-					borderless: true,
-					radius: 20
-				}}
-			>
-				{
-					onBack ?
+			{
+				onBack ?
+				<Pressable
+					onPress={onBack}
+					style={{
+						marginTop: 25
+					}}
+					android_ripple={{
+						color: foreground.secondary,
+						borderless: true,
+						radius: 20
+					}}
+				>
 					<Text
 						style={{
 							color: foreground.primary,
@@ -49,9 +50,9 @@ export default function UnderDevelopment({onBack, style={}}) {
 					>
 						Back
 					</Text>
-					: null
-				}
-			</Pressable>
+				</Pressable>
+				: null
+			}
 		</View>
 	)
 }

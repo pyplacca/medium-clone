@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../context';
 import { NavigationContainer, DefaultTheme } from '@react-navigation/native';
-import { theme } from '../config';
+import { theme, themeMode } from '../config';
 
 
 function Navigation ({children}) {
 	const { state } = useContext(AppContext);
-	const { colors } = theme[state.darkMode ? 'dark' : 'light']
+	const { colors } = theme[themeMode[state.darkMode]]
 
 	const appTheme = {
 		...DefaultTheme,

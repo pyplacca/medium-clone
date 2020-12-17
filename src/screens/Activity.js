@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { SimpleHeader } from '../components/headers';
 import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
 import { AppContext } from '../context';
-import { measure, theme } from '../config';
+import { measure, theme, themeMode } from '../config';
 
 
 function Activity () {
 	const { state: {darkMode}, dispatch } = useContext(AppContext);
-	const { background: bg, foreground: fg } = theme[darkMode ? 'dark' : 'light'].colors;
+	const { background: bg, foreground: fg } = theme[themeMode[darkMode]].colors;
 	const textStyle = {
 		color: fg.primary,
 		textAlign: 'center',
