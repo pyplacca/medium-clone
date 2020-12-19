@@ -1,10 +1,20 @@
-export { default as UnderDevelopment } from './UnderDevelopment';
-export { default as FailedToConnect } from './FailedToConnect';
-export { default as Navigation } from './Navigation';
-export { default as ButtonRow } from './ButtonRow';
-export { default as UserIcon } from './UserIcon';
-export { default as Creator } from './Creator';
-export { default as Icon } from './Icon';
-export { default as Text } from './Text';
+import UnderDevelopment from './UnderDevelopment';
+import NotConnected from './NotConnected';
+import Navigation from './Navigation';
+import ButtonRow from './ButtonRow';
+import UserIcon from './UserIcon';
+import Creator from './Creator';
+import Icon from './Icon';
+import Text from './Text';
+
 export * from './Misc';
-// export * from './home';
+export {
+	UnderDevelopment,
+	NotConnected,
+	Navigation,
+	ButtonRow,
+	UserIcon,
+	Creator,
+	Icon,
+	Text,
+}
