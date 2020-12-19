@@ -1,5 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Pressable } from 'react-native';
+import NetInfo from "@react-native-community/netinfo";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { AppContext } from './context';
@@ -32,9 +33,17 @@ const Tab = createBottomTabNavigator();
 
 function AppNavigator (props) {
 
-	const { state: {darkMode} } = useContext(AppContext);
+	const { state: {darkMode}, dispatch } = useContext(AppContext);
 	const { background: bg, foreground: fg } = theme[themeMode[darkMode]].colors;
 
+  useEffect(() => {
+    NetInfo.addEventListener(event => {
+      dispatch({
+      	type: 'NETWORK',
+      	payload: event
+      })
+    })
+  }, [])
 
 	return (
 		<Navigation>

@@ -22,6 +22,7 @@ const initialState = {
 	connectedToTwitter: false,
 	connectedToFacebook: false,
 	beta: null, // other values: 'beta' or 'classic'
+	connection: {},
 };
 
 function reducer (state, action) {
@@ -62,6 +63,9 @@ function reducer (state, action) {
 					following: state.user.following + 1
 				}
 			}
+
+		case 'NETWORK':
+			return {...state, connection: payload}
 
 		default:
 			return state
