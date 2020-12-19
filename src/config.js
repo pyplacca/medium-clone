@@ -35,7 +35,7 @@ export const theme = {
 				tetiary: '#258122',
 			}
 		}
-	}
+	},
 };
 
 export const measure = {
@@ -45,6 +45,20 @@ export const measure = {
 	l: 70,
 	xl: 100,
 };
+
+export const font = {
+	body: {
+		fontFamily: 'Sohne300',
+		fontSize: 13
+	},
+	title: {
+		fontFamily: 'Sohne500',
+		fontSize: 17,
+	},
+	heading: {
+		fontFamily: 'Sohne700'
+	},
+}
 
 export const screenModalOptions = {
 	cardStyle: {
