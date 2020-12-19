@@ -8,25 +8,16 @@ import AppNavigator from './src/AppNavigator';
 
 export default function App () {
 	// load fonts
-  const [loaded] = useFonts({});
-  // const [isReady, setIsReady] = useState(false);
+  const [loaded] = useFonts({
+    Sohne300: require('./assets/fonts/sohne-300-normal.ttf'),
+    Sohne500: require('./assets/fonts/sohne-500-normal.ttf'),
+    Sohne700: require('./assets/fonts/sohne-700-normal.ttf'),
+    GTSuper: require('./assets/fonts/gt-super-400-normal.ttf'),
+  });
 
-  // const _cacheResourcesAsync = async () => {
-  //   const images = [require('./assets/logo-white.png')];
-
-  //   const cacheImages = images.map(image => {
-  //     return Asset.fromModule(image).downloadAsync();
-  //   });
-  //   return Promise.all(cacheImages);
-  // }
-
-  return !loaded /*&& !isReady*/ ? (
+  return !loaded ? (
   	// show loading screen
-	  <AppLoading
-	    // startAsync={_cacheResourcesAsync}
-	    // onFinish={() => setIsReady(true)}
-	    // onError={console.warn}
-	  />
+	  <AppLoading/>
   ) : (
     <AppProvider>
       <StatusBar style='dark'/>
