@@ -3,7 +3,7 @@ import { View, ScrollView, FlatList, Image, Pressable, StyleSheet } from 'react-
 import { Feather, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { SimpleHeader } from '#/components/headers';
 import { Featured, StoryCard } from '#/components/home';
-import { Creator, Text } from '#/components';
+import { Creator, Text, NotConnected } from '#/components';
 import { AppContext } from '#/context';
 import { measure, theme, themeMode, font } from '#/config';
 import MediumSymbol from '../../../assets/medium-symbol.svg';
@@ -24,7 +24,7 @@ const storyTags = stories.reduce((tags, story) => {
 const data = Array(9).fill().map((_, i) => i)
 
 function Home ({navigation: {navigate}}) {
-	const {state: {darkMode}} = useContext(AppContext);
+	const {state: {darkMode, connection}} = useContext(AppContext);
 	const colorMode = themeMode[darkMode];
 	const { foreground, background } = theme[colorMode].colors;
 
@@ -76,304 +76,311 @@ function Home ({navigation: {navigate}}) {
 						</Pressable>
 					</View>
 				</SimpleHeader>
-
-				{/* FEATURED STORY */}
-				<Featured
-					story={stories[0]}
-					creator={creators[stories[0].creator]}
-					colorMode={colorMode}
-					style={{
-						borderBottomColor: background.secondary,
-						...styles.underlined
-					}}
-				/>
-
-				{/* SUGGESTED CREATORS TO FOLLOW */}
-				<View
-					style={[
-						styles.section,
-						styles.underlined,
-						{ borderBottomColor: background.secondary }
-					]}
-				>
-					<Text
-						style={[
-							{color: foreground.primary},
-							styles.sectionTitle
-						]}
-					>
-						who to follow
-					</Text>
-					<FlatList
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						data={data}
-						renderItem={({item: i}) => (
-							<Creator
-								// key={item}
-								size='large'
+				{
+					!connection.isConnected ? (
+						<NotConnected text='your home screen' isDarkMode={darkMode}/>
+					) : (
+						<View>
+							{/* FEATURED STORY */}
+							<Featured
+								story={stories[0]}
+								creator={creators[stories[0].creator]}
 								colorMode={colorMode}
 								style={{
-									width: 135,
-									marginRight: measure.s + (
-										i === data.length - 1 ?
-										measure.s :
-										measure.xs
-									),
-									marginLeft: !i ? padH : 0,
+									borderBottomColor: background.secondary,
+									...styles.underlined
 								}}
-								{...creators.tds}
 							/>
-						)}
-						keyExtractor={item => item+''}
-					/>
-				</View>
 
-				{/* DAILY READ */}
-				<View
-					style={[
-						styles.section,
-						styles.underlined,
-						{
-							borderBottomColor: background.secondary,
-							paddingBottom: measure.s
-						}
-					]}
-				>
-					<View>
-						{/*<Image/> icon*/}
-						<Text
-							style={[
-								{color: foreground.primary},
-								styles.sectionTitle
-							]}
-						>
-							Your daily read
-						</Text>
-					</View>
-					<View style={{paddingHorizontal: padH}}>
-						{
-							storyTags['daily-read'].slice(0, 5).map(item => (
-								<StoryCard
-									story={item}
-									creator={creators[item.creator]}
-									showCover
-									colorMode={colorMode}
-									style={{marginVertical: measure.xs}}
-									key={item.id}
+							{/* SUGGESTED CREATORS TO FOLLOW */}
+							<View
+								style={[
+									styles.section,
+									styles.underlined,
+									{ borderBottomColor: background.secondary }
+								]}
+							>
+								<Text
+									style={[
+										{color: foreground.primary},
+										styles.sectionTitle
+									]}
+								>
+									who to follow
+								</Text>
+								<FlatList
+									horizontal
+									showsHorizontalScrollIndicator={false}
+									data={data}
+									renderItem={({item: i}) => (
+										<Creator
+											// key={item}
+											size='large'
+											colorMode={colorMode}
+											style={{
+												width: 135,
+												marginRight: measure.s + (
+													i === data.length - 1 ?
+													measure.s :
+													measure.xs
+												),
+												marginLeft: !i ? padH : 0,
+											}}
+											{...creators.tds}
+										/>
+									)}
+									keyExtractor={item => item+''}
 								/>
-							))
-						}
-					</View>
-				</View>
+							</View>
 
-				<View
-					style={[
-						styles.section,
-						styles.underlined,
-						{ borderBottomColor: background.secondary }
-					]}
-				>
-					<Text
-						style={[
-							styles.sectionTitle,
-							{
-								color: foreground.primary,
-								marginBottom: 0
-							}
-						]}
-					>
-						building blocks
-					</Text>
-					<Text
-						style={[
-							styles.sectionSubtitle,
-							{ color: foreground.primary }
-						]}
-					>
-						Insight into what it takes to make a company
-					</Text>
-					<FlatList
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						data={data}
-						renderItem={({item: i}) => (
-							<Creator
-								// key={item}
-								size='large'
-								colorMode={colorMode}
-								isSuggestion={false}
-								style={{
-									width: 135,
-									marginRight: measure.s + (i === data.length - 1 ? measure.s : measure.xs),
-									marginLeft: !i ? padH : 0,
-								}}
-								{...creators.tds}
-							/>
-						)}
-						keyExtractor={item => item+''}
-					/>
-				</View>
+							{/* DAILY READ */}
+							<View
+								style={[
+									styles.section,
+									styles.underlined,
+									{
+										borderBottomColor: background.secondary,
+										paddingBottom: measure.s
+									}
+								]}
+							>
+								<View>
+									{/*<Image/> icon*/}
+									<Text
+										style={[
+											{color: foreground.primary},
+											styles.sectionTitle
+										]}
+									>
+										Your daily read
+									</Text>
+								</View>
+								<View style={{paddingHorizontal: padH}}>
+									{
+										storyTags['daily-read'].slice(0, 5).map(item => (
+											<StoryCard
+												story={item}
+												creator={creators[item.creator]}
+												showCover
+												colorMode={colorMode}
+												style={{marginVertical: measure.xs}}
+												key={item.id}
+											/>
+										))
+									}
+								</View>
+							</View>
 
-				{/* OUR READ */}
-				<View
-					style={[
-						styles.section,
-						styles.underlined,
-						{
-							backgroundColor: background.secondary,
-							borderBottomColor: background.secondary,
-						}
-					]}
-				>
-					<Text
-						style={[
-							styles.superTitle,
-							{color: foreground.primary}
-						]}
-					>
-						What we're reading today
-					</Text>
-					<Text
-						style={{
-							color: foreground.secondary,
-							marginLeft: padH,
-							marginVertical: measure.xs
-						}}
-					>
-						Highlights from all corners of Medium
-					</Text>
-					<FlatList
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						data={storyTags['our-read']}
-						keyExtractor={item => item.id}
-						renderItem={({item, index: i}) => (
-							<StoryCard
-								orientation='vertical'
-								showCover
-								story={item}
-								creator={creators[item.creator]}
-								creatorStyle={{marginVertical: measure.xs}}
-								colorMode={colorMode}
-								style={{
-									// width: 135,
-									marginRight: measure.s + (
-										i === storyTags['our-read'].length - 1 ?
-										measure.s :
-										measure.xs
-									),
-									marginLeft: !i ? padH : 0,
-									marginTop: measure.s,
-								}}
-								key={item.id}
-							/>
-						)}
-					/>
-				</View>
-
-				{/* EDUCATORS */}
-				<View
-					style={[
-						styles.section,
-						styles.underlined,
-						{
-							borderBottomColor: background.secondary,
-						}
-					]}
-				>
-					<Text
-						style={[
-							styles.sectionTitle,
-							{
-								color: foreground.primary,
-								marginBottom: 0
-							}
-						]}
-					>
-						The educators
-					</Text>
-					<Text
-						style={[
-							styles.sectionSubtitle,
-							{ color: foreground.primary }
-						]}
-					>
-						Teachers and professors on Medium
-					</Text>
-					<FlatList
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						data={data}
-						renderItem={({item: i}) => (
-							<Creator
-								// key={item}
-								size='large'
-								colorMode={colorMode}
-								isSuggestion={false}
-								style={{
-									width: 135,
-									marginRight: measure.s + (i === data.length - 1 ? measure.s : measure.xs),
-									marginLeft: !i ? padH : 0,
-								}}
-								{...creators.tds}
-							/>
-						)}
-						keyExtractor={item => item+''}
-					/>
-				</View>
-
-				{/* TRENDING */}
-				<View
-					style={[
-						styles.section,
-						styles.underlined,
-						{
-							borderBottomColor: background.secondary,
-							paddingBottom: measure.s
-						}
-					]}
-				>
-					<View
-						style={[
-							styles.row,
-							{
-								marginLeft: padH,
-								marginBottom: measure.s,
-							}
-						]}
-					>
-						<Feather name="trending-up" size={20} color={foreground.primary} />
-						<Text
-							style={[
-								styles.sectionTitle,
-								{
-									color: foreground.primary,
-									marginBottom: 0,
-									marginTop: 0,
-									marginLeft: measure.xs + 3,
-									textAlignVertical: 'center'
-								}
-							]}
-						>
-							Trending on Medium
-						</Text>
-					</View>
-					<View style={{paddingHorizontal: padH}}>
-						{
-							storyTags['trending'].slice(0, 5).map((item, i) => (
-								<StoryCard
-									story={item}
-									marker={(i < 10 ? '0' : '') + (i + 1)}
-									creator={creators[item.creator]}
-									colorMode={colorMode}
-									style={{marginVertical: measure.xs * 2}}
-									key={item.id}
+							<View
+								style={[
+									styles.section,
+									styles.underlined,
+									{ borderBottomColor: background.secondary }
+								]}
+							>
+								<Text
+									style={[
+										styles.sectionTitle,
+										{
+											color: foreground.primary,
+											marginBottom: 0
+										}
+									]}
+								>
+									building blocks
+								</Text>
+								<Text
+									style={[
+										styles.sectionSubtitle,
+										{ color: foreground.primary }
+									]}
+								>
+									Insight into what it takes to make a company
+								</Text>
+								<FlatList
+									horizontal
+									showsHorizontalScrollIndicator={false}
+									data={data}
+									renderItem={({item: i}) => (
+										<Creator
+											// key={item}
+											size='large'
+											colorMode={colorMode}
+											isSuggestion={false}
+											style={{
+												width: 135,
+												marginRight: measure.s + (i === data.length - 1 ? measure.s : measure.xs),
+												marginLeft: !i ? padH : 0,
+											}}
+											{...creators.tds}
+										/>
+									)}
+									keyExtractor={item => item+''}
 								/>
-							))
-						}
-					</View>
-				</View>
+							</View>
+
+							{/* OUR READ */}
+							<View
+								style={[
+									styles.section,
+									styles.underlined,
+									{
+										backgroundColor: background.secondary,
+										borderBottomColor: background.secondary,
+									}
+								]}
+							>
+								<Text
+									style={[
+										styles.superTitle,
+										{color: foreground.primary}
+									]}
+								>
+									What we're reading today
+								</Text>
+								<Text
+									style={{
+										color: foreground.secondary,
+										marginLeft: padH,
+										marginVertical: measure.xs
+									}}
+								>
+									Highlights from all corners of Medium
+								</Text>
+								<FlatList
+									horizontal
+									showsHorizontalScrollIndicator={false}
+									data={storyTags['our-read']}
+									keyExtractor={item => item.id}
+									renderItem={({item, index: i}) => (
+										<StoryCard
+											orientation='vertical'
+											showCover
+											story={item}
+											creator={creators[item.creator]}
+											creatorStyle={{marginVertical: measure.xs}}
+											colorMode={colorMode}
+											style={{
+												// width: 135,
+												marginRight: measure.s + (
+													i === storyTags['our-read'].length - 1 ?
+													measure.s :
+													measure.xs
+												),
+												marginLeft: !i ? padH : 0,
+												marginTop: measure.s,
+											}}
+											key={item.id}
+										/>
+									)}
+								/>
+							</View>
+
+							{/* EDUCATORS */}
+							<View
+								style={[
+									styles.section,
+									styles.underlined,
+									{
+										borderBottomColor: background.secondary,
+									}
+								]}
+							>
+								<Text
+									style={[
+										styles.sectionTitle,
+										{
+											color: foreground.primary,
+											marginBottom: 0
+										}
+									]}
+								>
+									The educators
+								</Text>
+								<Text
+									style={[
+										styles.sectionSubtitle,
+										{ color: foreground.primary }
+									]}
+								>
+									Teachers and professors on Medium
+								</Text>
+								<FlatList
+									horizontal
+									showsHorizontalScrollIndicator={false}
+									data={data}
+									renderItem={({item: i}) => (
+										<Creator
+											// key={item}
+											size='large'
+											colorMode={colorMode}
+											isSuggestion={false}
+											style={{
+												width: 135,
+												marginRight: measure.s + (i === data.length - 1 ? measure.s : measure.xs),
+												marginLeft: !i ? padH : 0,
+											}}
+											{...creators.tds}
+										/>
+									)}
+									keyExtractor={item => item+''}
+								/>
+							</View>
+
+							{/* TRENDING */}
+							<View
+								style={[
+									styles.section,
+									styles.underlined,
+									{
+										borderBottomColor: background.secondary,
+										paddingBottom: measure.s
+									}
+								]}
+							>
+								<View
+									style={[
+										styles.row,
+										{
+											marginLeft: padH,
+											marginBottom: measure.s,
+										}
+									]}
+								>
+									<Feather name="trending-up" size={20} color={foreground.primary} />
+									<Text
+										style={[
+											styles.sectionTitle,
+											{
+												color: foreground.primary,
+												marginBottom: 0,
+												marginTop: 0,
+												marginLeft: measure.xs + 3,
+												textAlignVertical: 'center'
+											}
+										]}
+									>
+										Trending on Medium
+									</Text>
+								</View>
+								<View style={{paddingHorizontal: padH}}>
+									{
+										storyTags['trending'].slice(0, 5).map((item, i) => (
+											<StoryCard
+												story={item}
+												marker={(i < 10 ? '0' : '') + (i + 1)}
+												creator={creators[item.creator]}
+												colorMode={colorMode}
+												style={{marginVertical: measure.xs * 2}}
+												key={item.id}
+											/>
+										))
+									}
+								</View>
+							</View>
+						</View>
+					)
+				}
 			</ScrollView>
 		</View>
 	)

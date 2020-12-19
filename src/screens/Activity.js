@@ -1,32 +1,41 @@
 import React, { useContext } from 'react';
 import { SimpleHeader } from '../components/headers';
 import { View, Pressable, ScrollView, StyleSheet } from 'react-native';
-import { Text } from 'components';
+import { Text, NotConnected } from '#/components';
 import { AppContext } from '../context';
 import { measure, theme, themeMode, font } from '../config';
 
 
 function Activity () {
-	const { state: {darkMode} } = useContext(AppContext);
+	const { state: {darkMode, connection} } = useContext(AppContext);
 	const { background: bg } = theme[themeMode[darkMode]].colors;
 
 	return (
 		<View>
 			<ScrollView>
 				<SimpleHeader title='Activity'/>
-				<View
-					style={[
-						styles.placeholder,
-						{backgroundColor: bg.secondary}
-					]}
-				>
-					<Text style={styles.title}>
-						Stay up to date
-					</Text>
-					<Text style={styles.subtitle}>
-						See updates from the people you follow and interact with your stories
-					</Text>
-				</View>
+				{
+					!connection.isConnected ? (
+						<NotConnected
+							text='your recent activity'
+							isDarkMode={darkMode}
+						/>
+					) : (
+						<View
+							style={[
+								styles.placeholder,
+								{backgroundColor: bg.secondary}
+							]}
+						>
+							<Text style={styles.title}>
+								Stay up to date
+							</Text>
+							<Text style={styles.subtitle}>
+								See updates from the people you follow and interact with your stories
+							</Text>
+						</View>
+					)
+				}
 			</ScrollView>
 		</View>
 	)

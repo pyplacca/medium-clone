@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Text } from '#/components';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
-import { UserIcon } from '#/components';
+import { UserIcon, NotConnected } from '#/components';
 import { SimpleHeader } from '#/components/headers';
 import { theme, measure, themeMode } from '#/config';
 import { AppContext } from '#/context';
@@ -19,7 +19,7 @@ import { AppContext } from '#/context';
 
 function Account (props) {
 	const {navigate} =  props.navigation;
-	const { user, darkMode } = useContext(AppContext).state;
+	const { user, darkMode, connection } = useContext(AppContext).state;
 	const { foreground, background } = theme[themeMode[darkMode]].colors;
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -43,7 +43,10 @@ function Account (props) {
 			refreshControl={
 				<RefreshControl {...{refreshing, onRefresh}}/>
 			}
-			contentContainerStyle={styles.container}
+			contentContainerStyle={{
+				backgroundColor: background.secondary,
+				flex: 1
+			}}
 		>
 			<SimpleHeader style={styles.header}>
 				<Pressable
@@ -59,105 +62,118 @@ function Account (props) {
 					<EvilIcons name="gear" size={25} color={foreground.secondary} />
 				</Pressable>
 			</SimpleHeader>
-			<View style={{...styles.innerContainer, borderBottomColor: background.secondary}}>
-				<View style={styles.leadRow}>
-					{/* profile image */}
-					<UserIcon size={90} />
+			{
+				!connection.isConnected ? (
+					<NotConnected text='your stories' isDarkMode={darkMode}/>
+				) : (
 					<View
 						style={{
 							flex: 1,
-							justifyContent: 'space-between',
-							marginLeft: measure.s
+							backgroundColor: background.primary
 						}}
 					>
-						<View style={styles.justRow}>
-							<Text
-								style={{
-									color: foreground.primary,
-									...styles.username
-								}}
-							>
-								{[user.firstName, user.lastName].join(' ')}
-							</Text>
-							{/* edit text button */}
-							<Pressable
-								onPress={() => navigate('profile-edit')}
-							>
-								<Text
+						<View style={{...styles.innerContainer, borderBottomColor: background.secondary}}>
+							<View style={styles.leadRow}>
+								{/* profile image */}
+								<UserIcon size={90} />
+								<View
 									style={{
-										color: foreground.tetiary,
-										fontSize: 15,
+										flex: 1,
+										justifyContent: 'space-between',
+										marginLeft: measure.s
 									}}
 								>
-									Edit
-								</Text>
-							</Pressable>
+									<View style={styles.justRow}>
+										<Text
+											style={{
+												color: foreground.primary,
+												...styles.username
+											}}
+										>
+											{[user.firstName, user.lastName].join(' ')}
+										</Text>
+										{/* edit text button */}
+										<Pressable
+											onPress={() => navigate('profile-edit')}
+										>
+											<Text
+												style={{
+													color: foreground.tetiary,
+													fontSize: 15,
+												}}
+											>
+												Edit
+											</Text>
+										</Pressable>
+									</View>
+									{/* community reach */}
+									<View
+										style={{
+											...styles.justRow,
+											justifyContent: 'flex-start',
+											width: '53%',
+											marginTop: 64 + measure.s
+										}}
+									>
+										<Text
+											style={[
+												sds.textShade,
+												{marginRight: measure.xs + 3}
+											]}
+										>
+											{`${user.following.length} Following`}
+										</Text>
+										<Text style={sds.textShade}>
+											{`${user.followers.length} Followers`}
+										</Text>
+									</View>
+								</View>
+							</View>
+							{/* first story placeholder */}
 						</View>
-						{/* community reach */}
-						<View
-							style={{
-								...styles.justRow,
-								justifyContent: 'flex-start',
-								width: '53%',
-								marginTop: 64 + measure.s
-							}}
-						>
-							<Text
-								style={[
-									sds.textShade,
-									{marginRight: measure.xs + 3}
-								]}
-							>
-								{`${user.following.length} Following`}
-							</Text>
-							<Text style={sds.textShade}>
-								{`${user.followers.length} Followers`}
-							</Text>
+						<View style={styles.mainRow}>
+							{
+								!user.stories.public.length
+								?
+								<View style={{...styles.firstStory, backgroundColor: background.secondary}}>
+									<Text
+										style={{
+											...sds.text,
+											fontWeight: 'bold',
+											fontSize: 17
+										}}
+									>
+										Write your first story
+									</Text>
+									<Text
+										style={{
+											...sds.textShade,
+											marginVertical: measure.xs * 2
+										}}
+									>
+										We'd love to hear what you're thinking
+									</Text>
+									<Pressable
+										style={{
+											...styles.firstStoryBtn,
+											backgroundColor: foreground.tetiary
+										}}
+										android_ripple={{
+											color: theme.dark.colors.background.secondary,
+										}}
+									>
+										<Text style={{color: '#fff', fontWeight: 'bold'}}>
+											Start your first story
+										</Text>
+									</Pressable>
+								</View>
+								:
+								null
+							}
 						</View>
 					</View>
-				</View>
-				{/* first story placeholder */}
-			</View>
-			<View style={styles.mainRow}>
-				{
-					!user.stories.public.length
-					?
-					<View style={{...styles.firstStory, backgroundColor: background.secondary}}>
-						<Text
-							style={{
-								...sds.text,
-								fontWeight: 'bold',
-								fontSize: 17
-							}}
-						>
-							Write your first story
-						</Text>
-						<Text
-							style={{
-								...sds.textShade,
-								marginVertical: measure.xs * 2
-							}}
-						>
-							We'd love to hear what you're thinking
-						</Text>
-						<Pressable
-							style={{
-								...styles.firstStoryBtn,
-								backgroundColor: foreground.tetiary
-							}}
-							android_ripple={{
-								color: theme.dark.colors.background.secondary,
-							}}
-						>
-							<Text style={{color: '#fff', fontWeight: 'bold'}}>
-								Start your first story
-							</Text>
-						</Pressable>
-					</View>
-					:
-					null
-				}
-			</View>
+				)
+			}
 		</ScrollView>
 	)
 };
