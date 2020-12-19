@@ -1,15 +1,14 @@
 import React, { useContext } from 'react';
-import { View, ScrollView, FlatList, Text, Image, Pressable, StyleSheet } from 'react-native';
+import { View, ScrollView, FlatList, Image, Pressable, StyleSheet } from 'react-native';
 import { Feather, MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
-import { SimpleHeader } from '../../components/headers';
-import { Featured, StoryCard } from '../../components/home';
-import { Creator } from '../../components'
-import { AppContext } from '../../context';
-import { measure, theme } from '../../config';
-import logoBlack from '../../../assets/logo-black.png';
-import logoWhite from '../../../assets/logo-white.png';
-import { stories, creators } from '../../database';
-import { greetings } from '../../utils';
+import { SimpleHeader } from '#/components/headers';
+import { Featured, StoryCard } from '#/components/home';
+import { Creator, Text } from '#/components';
+import { AppContext } from '#/context';
+import { measure, theme, themeMode, font } from '#/config';
+import MediumSymbol from '../../../assets/medium-symbol.svg';
+import { stories, creators } from '#/database';
+import { greetings } from '#/utils';
 
 
 const storyTags = stories.reduce((tags, story) => {
@@ -22,14 +21,11 @@ const storyTags = stories.reduce((tags, story) => {
 	return tags
 }, {});
 
-// console.log(storyTags);
 const data = Array(9).fill().map((_, i) => i)
-// const dailyRead = stories.filter(story => story.tags.includes('daily-read')).slice(0, 5)
-// const ourRead = stories.filter(story => story.tags.includes('our-read'))
 
 function Home ({navigation: {navigate}}) {
 	const {state: {darkMode}} = useContext(AppContext);
-	const colorMode = darkMode ? 'dark' : 'light';
+	const colorMode = themeMode[darkMode];
 	const { foreground, background } = theme[colorMode].colors;
 
 
@@ -45,14 +41,13 @@ function Home ({navigation: {navigate}}) {
 					}}
 				>
 					<View style={styles.header}>
-						<Image
-							source={darkMode ? logoWhite : logoBlack}
-							style={styles.logo}
-						/>
+						<MediumSymbol width={lsz} height={styles.logo.height} fill={foreground.primary}/>
 						<Text
+							type='title'
 							style={{
 								color: foreground.primary,
-								fontWeight: 'bold'
+								fontSize: 15,
+								marginLeft: measure.xs
 							}}
 						>
 							{`Good ${greetings()}`}
@@ -120,7 +115,11 @@ function Home ({navigation: {navigate}}) {
 								colorMode={colorMode}
 								style={{
 									width: 135,
-									marginRight: measure.s + (i === data.length - 1 ? measure.s : measure.xs),
+									marginRight: measure.s + (
+										i === data.length - 1 ?
+										measure.s :
+										measure.xs
+									),
 									marginLeft: !i ? padH : 0,
 								}}
 								{...creators.tds}
@@ -172,9 +171,7 @@ function Home ({navigation: {navigate}}) {
 					style={[
 						styles.section,
 						styles.underlined,
-						{
-							borderBottomColor: background.secondary,
-						}
+						{ borderBottomColor: background.secondary }
 					]}
 				>
 					<Text
@@ -191,11 +188,7 @@ function Home ({navigation: {navigate}}) {
 					<Text
 						style={[
 							styles.sectionSubtitle,
-							{
-								color: foreground.primary,
-								marginLeft: padH,
-								marginBottom: measure.s
-							}
+							{ color: foreground.primary }
 						]}
 					>
 						Insight into what it takes to make a company
@@ -265,7 +258,11 @@ function Home ({navigation: {navigate}}) {
 								colorMode={colorMode}
 								style={{
 									// width: 135,
-									marginRight: measure.s + (i === storyTags['our-read'].length - 1 ? measure.s : measure.xs),
+									marginRight: measure.s + (
+										i === storyTags['our-read'].length - 1 ?
+										measure.s :
+										measure.xs
+									),
 									marginLeft: !i ? padH : 0,
 									marginTop: measure.s,
 								}}
@@ -299,11 +296,7 @@ function Home ({navigation: {navigate}}) {
 					<Text
 						style={[
 							styles.sectionSubtitle,
-							{
-								color: foreground.primary,
-								marginLeft: padH,
-								marginBottom: measure.s
-							}
+							{ color: foreground.primary }
 						]}
 					>
 						Teachers and professors on Medium
@@ -386,8 +379,8 @@ function Home ({navigation: {navigate}}) {
 	)
 };
 
-const lsz = 50;
-const padH = measure.s * 2
+const lsz = 35;
+const padH = measure.s * 2 - 10
 
 const styles = StyleSheet.create({
 	header: {
@@ -412,16 +405,22 @@ const styles = StyleSheet.create({
 
 	sectionTitle: {
 		textTransform: 'uppercase',
-		fontWeight: 'bold',
+		...font.title,
 		fontSize: 13,
 		marginLeft: padH,
 		marginTop: measure.xs,
 		marginBottom: measure.s,
 	},
 
+	sectionSubtitle: {
+		marginLeft: padH,
+		marginBottom: measure.s,
+		marginTop: measure.xs
+	},
+
 	superTitle: {
+		...font.title,
 		fontSize: 29,
-		fontWeight: 'bold',
 		marginLeft: padH,
 	},
 
