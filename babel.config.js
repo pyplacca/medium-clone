@@ -1,3 +1,6 @@
+const rootPathSuffix = 'src';
+const rootPathPrefix = '#';
+
 module.exports = function(api) {
   api.cache(true);
   return {
@@ -11,10 +14,21 @@ module.exports = function(api) {
 			],
 			[
 				'babel-plugin-root-import', {
-					rootPathPrefix: '#',
-					rootPathSuffix: 'src'
+					rootPathPrefix,
+					rootPathSuffix
 				}
 			]
 		]
-  };
+  },
+  env: {
+    production: {
+      plugins: [
+        'babel-plugin-root-import',
+        {
+          rootPathPrefix,
+          rootPathSuffix
+        }
+      ]
+    }
+  }
 };
