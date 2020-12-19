@@ -7,7 +7,7 @@
     "orientation": "portrait",
     "icon": "./assets/logo-black.png",
     "androidStatusBar": {
-      "barStyle": "dark-content",
+      "barStyle": "dark-content"
     },
     "splash": {
       "image": "./assets/splash.png",
