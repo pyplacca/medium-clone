@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, Pressable, Text, Image } from 'react-native';
+import { ScrollView, Pressable, Image } from 'react-native';
+import { Text } from '#/components';
 import { theme, measure } from '../config';
 
 

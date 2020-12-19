@@ -5,6 +5,7 @@ const initialState = {
 	user: {
 		firstName: 'David',
 		lastName: 'Placca',
+		// avi:
 		followers: [], // array of follower ids
 		following: [ // array of creator ids
 			1, 2
@@ -21,8 +22,6 @@ const initialState = {
 	connectedToTwitter: false,
 	connectedToFacebook: false,
 	beta: null, // other values: 'beta' or 'classic'
-	// settings: {
-	// },
 };
 
 function reducer (state, action) {
@@ -31,7 +30,6 @@ function reducer (state, action) {
 	switch (type) {
 
 		case 'DARK_MODE':
-			// state.darkMode = payload
 			return { ...state, darkMode: payload }
 
 		case 'BETA':

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
+import { View, Image, Pressable, StyleSheet } from 'react-native';
+import { Text } from 'components';
 import { measure, theme } from '../../config';
 
 
@@ -29,7 +30,7 @@ function StackHeader ({
 			{...props}
 		>
 			<Pressable
-				onPress={() => navigation.goBack()}
+				onPress={navigation.goBack}
 				android_ripple={{
 					color: theme.dark.colors.foreground.secondary,
 					borderless: true,
@@ -39,14 +40,14 @@ function StackHeader ({
 				<Ionicons name="md-arrow-back" size={icz} color={fg.primary}/>
 			</Pressable>
 			<Text
-				style={[
-					styles.title,
-					{
-						color: fg.primary,
-						textAlign: centerTitle ? 'center' : 'left',
-						marginRight: centerTitle ? measure.s * 2 + icz : 0,
-					},
-				]}
+				style={{
+					flex: 1,
+					marginLeft: measure.s * 2,
+					color: fg.primary,
+					textAlign: centerTitle ? 'center' : 'left',
+					marginRight: centerTitle ? measure.s * 2 + icz : 0,
+				}}
+				type='title'
 			>
 				{title}
 			</Text>
@@ -61,13 +62,7 @@ const styles = StyleSheet.create({
 	frame: {
 		padding: measure.s + 2,
 		flexDirection: 'row',
-	},
-
-	title: {
-		flex: 1,
-		fontSize: 16,
-		marginLeft: measure.s * 2,
-		fontWeight: 'bold',
+		alignItems: 'center'
 	},
 
 	// icon: {

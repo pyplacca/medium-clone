@@ -1,11 +1,11 @@
 import React, { useLayoutEffect, useContext } from 'react';
-import { ScrollView, View, Text, Pressable, StyleSheet } from 'react-native';
+import { ScrollView, View, Pressable, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { SimpleHeader } from '../../../components/headers';
-import { ButtonRow, Gap, CheckBox } from '../../../components';
-import { AppContext } from '../../../context';
-import { theme, measure, themeMode } from '../../../config';
+import { SimpleHeader } from 'components/headers';
+import { ButtonRow, Gap, CheckBox, Text } from 'components';
+import { AppContext } from 'context';
+import { theme, measure, themeMode } from 'config';
 // screens
 import DarkMode from './DarkMode';
 import Beta from './Beta';
@@ -18,7 +18,7 @@ function Settings ({navigation, route}) {
 
 	const sds = {
 		emphasis: { color: fg.tetiary },
-		text: { color: fg.primary },
+		// text: { color: fg.primary },
 		lead: {
 			color: fg.secondary,
 			paddingHorizontal: measure.s + 2,
@@ -51,17 +51,16 @@ function Settings ({navigation, route}) {
 			<ScrollView>
 				<SimpleHeader title='Settings'/>
 				<Gap/>
-				<ButtonRow
-					text='Become a member'
-					textStyle={sds.emphasis}
-				/>
+				<ButtonRow text='Become a member' textStyle={sds.emphasis}/>
 				<Gap/>
 
 				{/* Configure Medium */}
 				<Text style={sds.lead}>Configure Medium</Text>
 				<ButtonRow text='Customize your interests' />
-				<ButtonRow onPress={() => sendDispatch('DARK_MODE', !state.darkMode)}>
-					<Text style={sds.text}>Dark Mode</Text>
+				<ButtonRow
+					onPress={() => sendDispatch('DARK_MODE', !state.darkMode)}
+					text='Dark Mode'
+				>
 					<Text style={sds.emphasis}>{state.darkMode ? 'On' : 'Off'}</Text>
 				</ButtonRow>
 				<ButtonRow text='Push Notifications' />
@@ -72,8 +71,10 @@ function Settings ({navigation, route}) {
 				<Gap/>
 
 				<ButtonRow text='Account' />
-				<ButtonRow onPress={() => goTo('beta')}>
-					<Text style={sds.text}>Toggle Medium Beta</Text>
+				<ButtonRow
+					onPress={() => goTo('beta')}
+					text='Toggle Medium Beta'
+				>
 					<MaterialIcons name="chevron-right" size={20} color={fg.secondary} />
 				</ButtonRow>
 				<Gap/>
@@ -81,16 +82,10 @@ function Settings ({navigation, route}) {
 				{/* Social */}
 				<Text style={sds.lead}>Social</Text>
 				<ButtonRow text='Join our community' />
-				<ButtonRow>
-					<View>
-						<Text style={sds.text}>Twitter</Text>
-					</View>
+				<ButtonRow text='Twitter'>
 					<Text style={sds.emphasis}>Connect</Text>
 				</ButtonRow>
-				<ButtonRow>
-					<View>
-						<Text style={sds.text}>Facebook</Text>
-					</View>
+				<ButtonRow text='Facebook'>
 					<Text style={sds.emphasis}>Connect</Text>
 				</ButtonRow>
 				<Gap/>
@@ -109,8 +104,8 @@ function Settings ({navigation, route}) {
 						'IMAGE_LOADING',
 						!state.imageLoadingDisabled
 					)}
+					text='Disabled image loading'
 				>
-					<Text style={sds.text}>Disabled image loading</Text>
 					<CheckBox
 						style={sds.checkbox}
 						checkColor={bg.primary}
@@ -122,8 +117,8 @@ function Settings ({navigation, route}) {
 						'BACKGROUND_DATA_USAGE',
 						!state.wifiOnlyBackgroundDataUsage
 					)}
+					text='Limit background data usage to wifi only'
 				>
-					<Text style={sds.text}>Limit background data usage to wifi only</Text>
 					<CheckBox
 						style={sds.checkbox}
 						checkColor={bg.primary}

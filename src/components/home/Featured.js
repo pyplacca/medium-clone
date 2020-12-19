@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Image, Pressable, Text } from 'react-native';
-import { Creator } from '../'
-import { theme, measure } from '../../config';
+import { View, Image, Pressable } from 'react-native';
+import { Creator, Text } from '../'
+import { theme, measure, font } from '../../config';
 
 
 function Featured ({story, creator, colorMode, onPress=()=>{}, style={}}) {
@@ -9,7 +9,7 @@ function Featured ({story, creator, colorMode, onPress=()=>{}, style={}}) {
 	return (
 		<View
 			style={{
-				paddingHorizontal: measure.s * 2,
+				paddingHorizontal: measure.s * 2 - 10,
 				paddingBottom: measure.s + measure.xs,
 				...style
 			}}
@@ -32,7 +32,7 @@ function Featured ({story, creator, colorMode, onPress=()=>{}, style={}}) {
 				style={{
 					color: foreground.primary,
 					fontSize: 22,
-					fontWeight: 'bold',
+					...font.title
 				}}
 			>
 				{story.title}

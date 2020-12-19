@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
-import { View, Pressable, Text } from 'react-native';
-import { AppContext } from '../context';
-import { theme, measure, themeMode } from '../config';
+import { View, Pressable } from 'react-native';
+import Text from '#/components/Text';
+import { AppContext } from '#/context';
+import { theme, measure, themeMode } from '#/config';
 
 
 function ButtonRow ({text, style, textStyle, children, ...props}) {
@@ -25,12 +26,7 @@ function ButtonRow ({text, style, textStyle, children, ...props}) {
 		>
 			{
 				text ?
-				<Text
-					style={{
-						color: colors.foreground.primary,
-						...textStyle
-					}}
-				>
+				<Text style={textStyle}>
 					{text}
 				</Text>
 				: null

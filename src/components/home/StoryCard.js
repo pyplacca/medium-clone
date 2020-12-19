@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, Text, Image, Pressable, StyleSheet } from 'react-native';
-import { Creator } from '../';
-import { theme, measure } from '../../config';
+import { View, Image, Pressable, StyleSheet } from 'react-native';
+import { Creator, Text } from '../';
+import { theme, measure } from '#/config';
 
 
 const direction = {

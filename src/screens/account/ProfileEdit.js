@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { ScrollView, View, Text, Pressable } from 'react-native';
+import { ScrollView, View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { UnderDevelopment } from 'components';
+import { Text, UnderDevelopment } from '#/components';
 import { measure, theme, themeMode } from 'config';
 import { AppContext } from 'context';
 
@@ -11,7 +11,6 @@ function ProfileEdit({navigation}) {
 	const { foreground, background } = theme[themeMode[state.darkMode]].colors;
 
 	const [edit, setEdit] = useState(state.user);
-	console.log(edit)
 
 	const saveChanges = () => {
 		dispatch({type: 'UPDATE_USER', edit})

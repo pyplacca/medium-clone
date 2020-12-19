@@ -1,13 +1,13 @@
 import React, { useLayoutEffect } from 'react';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
-import { StackNavigator } from '../components/navigators';
+import { StackNavigator } from '#/components/navigators';
 import Account, {
 	SettingsNavigator,
 	StoriesNavigator,
 	ProfileEdit
 } from './account';
-import { horizontalCardStyle } from '../config';
-import { StackHeader } from '../components/headers'
+import { horizontalCardStyle } from '#/config';
+import { StackHeader } from '#/components/headers'
 
 export default function AccountNavigator (props) {
 	// hide tab bar when user navigates to screens specified in "screenHidesTabBar"

@@ -1,17 +1,14 @@
 import React, { useContext } from 'react';
 import { SimpleHeader } from '../components/headers';
-import { View, Text, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { View, Pressable, ScrollView, StyleSheet } from 'react-native';
+import { Text } from 'components';
 import { AppContext } from '../context';
-import { measure, theme, themeMode } from '../config';
+import { measure, theme, themeMode, font } from '../config';
 
 
 function Activity () {
-	const { state: {darkMode}, dispatch } = useContext(AppContext);
-	const { background: bg, foreground: fg } = theme[themeMode[darkMode]].colors;
-	const textStyle = {
-		color: fg.primary,
-		textAlign: 'center',
-	}
+	const { state: {darkMode} } = useContext(AppContext);
+	const { background: bg } = theme[themeMode[darkMode]].colors;
 
 	return (
 		<View>
@@ -23,10 +20,10 @@ function Activity () {
 						{backgroundColor: bg.secondary}
 					]}
 				>
-					<Text style={[styles.title, textStyle]}>
+					<Text style={styles.title}>
 						Stay up to date
 					</Text>
-					<Text style={[styles.subtitle, textStyle]}>
+					<Text style={styles.subtitle}>
 						See updates from the people you follow and interact with your stories
 					</Text>
 				</View>
@@ -45,13 +42,14 @@ const styles = StyleSheet.create({
 	},
 
 	title: {
-		fontWeight: 'bold',
-		fontSize: 18,
-		marginBottom: measure.xs
+		...font.title,
+		marginBottom: measure.xs,
+		textAlign: 'center',
 	},
 
 	subtitle: {
-		lineHeight: 25
+		lineHeight: 25,
+		textAlign: 'center',
 	}
 });
 

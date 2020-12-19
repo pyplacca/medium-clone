@@ -5,5 +5,6 @@ export { default as ButtonRow } from './ButtonRow';
 export { default as UserIcon } from './UserIcon';
 export { default as Creator } from './Creator';
 export { default as Icon } from './Icon';
+export { default as Text } from './Text';
 export * from './Misc';
 // export * from './home';

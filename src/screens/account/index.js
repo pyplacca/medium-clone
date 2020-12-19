@@ -2,17 +2,17 @@ import React, { useState, useContext } from 'react';
 import {
 	ScrollView,
 	View,
-	Text,
 	Image,
 	Pressable,
 	RefreshControl,
 	StyleSheet
 } from 'react-native';
+import { Text } from '#/components';
 import { Ionicons, EvilIcons } from '@expo/vector-icons';
-import { UserIcon } from '../../components';
-import { SimpleHeader } from '../../components/headers';
-import { theme, measure } from '../../config';
-import { AppContext } from '../../context';
+import { UserIcon } from '#/components';
+import { SimpleHeader } from '#/components/headers';
+import { theme, measure, themeMode } from '#/config';
+import { AppContext } from '#/context';
 
 
 // const nFormat = n => Intl.NumberFormat().format(n)
@@ -20,7 +20,7 @@ import { AppContext } from '../../context';
 function Account (props) {
 	const {navigate} =  props.navigation;
 	const { user, darkMode } = useContext(AppContext).state;
-	const { foreground, background } = theme[darkMode ? 'dark' : 'light'].colors;
+	const { foreground, background } = theme[themeMode[darkMode]].colors;
 	const [refreshing, setRefreshing] = useState(false);
 
 	const onRefresh = () => {
@@ -81,7 +81,7 @@ function Account (props) {
 							</Text>
 							{/* edit text button */}
 							<Pressable
-								// onPress={() => navigate('edit-profile')}
+								onPress={() => navigate('profile-edit')}
 							>
 								<Text
 									style={{
@@ -97,11 +97,17 @@ function Account (props) {
 						<View
 							style={{
 								...styles.justRow,
+								justifyContent: 'flex-start',
 								width: '53%',
 								marginTop: 64 + measure.s
 							}}
 						>
-							<Text style={sds.textShade}>
+							<Text
+								style={[
+									sds.textShade,
+									{marginRight: measure.xs + 3}
+								]}
+							>
 								{`${user.following.length} Following`}
 							</Text>
 							<Text style={sds.textShade}>
@@ -119,7 +125,6 @@ function Account (props) {
 					<View style={{...styles.firstStory, backgroundColor: background.secondary}}>
 						<Text
 							style={{
-								...styles.storyText,
 								...sds.text,
 								fontWeight: 'bold',
 								fontSize: 17
@@ -127,7 +132,12 @@ function Account (props) {
 						>
 							Write your first story
 						</Text>
-						<Text style={[styles.storyText, sds.textShade]}>
+						<Text
+							style={{
+								...sds.textShade,
+								marginVertical: measure.xs * 2
+							}}
+						>
 							We'd love to hear what you're thinking
 						</Text>
 						<Pressable
@@ -190,11 +200,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 
-	storyText: {
-		// lineHeight: 25,
-		marginVertical: measure.xs
-	},
-
 	firstStoryBtn: {
 		padding: measure.s,
 		alignItems: 'center',
@@ -209,5 +214,6 @@ const styles = StyleSheet.create({
 })
 
 export default Account;
-export {default as SettingsNavigator} from './SettingsNavigator';
-export {default as StoriesNavigator} from './StoriesNavigator';
+export { default as SettingsNavigator } from './SettingsNavigator';
+export { default as StoriesNavigator } from './StoriesNavigator';
+export { default as ProfileEdit } from './ProfileEdit';

@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { Entypo } from '@expo/vector-icons';
-import { View, Pressable, Text } from 'react-native';
-import { AppContext } from '../context';
-import { theme, themeMode } from '../config';
+import { View, Pressable } from 'react-native';
+import Text from '#/components/Text';
+import { AppContext } from '#/context';
+import { theme, themeMode } from '#/config';
 
 
 export default function UnderDevelopment({onBack, style={}}) {
@@ -21,13 +22,13 @@ export default function UnderDevelopment({onBack, style={}}) {
 			<Entypo name="tools" size={25} color={foreground.primary} />
 			<Text
 				style={{
-					color: foreground.primary,
 					textAlign: 'center',
 					marginTop: 10
 				}}
 			>
-				<Text>This screen is currently under development.{'\n'}</Text>
-				<Text>Kindly check back in a few days.</Text>
+				This screen is currently under development.
+				{'\n'}
+				Kindly check back in a few days.
 			</Text>
 			{
 				onBack ?
@@ -42,12 +43,7 @@ export default function UnderDevelopment({onBack, style={}}) {
 						radius: 20
 					}}
 				>
-					<Text
-						style={{
-							color: foreground.primary,
-							textDecorationLine: 'underline'
-						}}
-					>
+					<Text style={{ textDecorationLine: 'underline' }}>
 						Back
 					</Text>
 				</Pressable>
