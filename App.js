@@ -20,7 +20,7 @@ export default function App () {
 	  <AppLoading/>
   ) : (
     <AppProvider>
-      <StatusBar style='dark'/>
+      <StatusBar style='dark-content'/>
       <AppNavigator />
     </AppProvider>
   );
