@@ -1,7 +1,4 @@
-import {
-	CardStyleInterpolators,
-	TransitionPresets
-} from '@react-navigation/stack';
+import { CardStyleInterpolators } from '@react-navigation/stack';
 
 export const themeMode = {
 	true: 'dark',
