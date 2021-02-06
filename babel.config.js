@@ -1,7 +1,7 @@
 const rootPathSuffix = 'src';
 const rootPathPrefix = '#';
 
-module.exports = function(api) {
+module.exports = function (api) {
   api.cache(true);
   return {
 		presets: ['babel-preset-expo'],
@@ -9,7 +9,7 @@ module.exports = function(api) {
 			[
 				'module-resolver', {
 					root: ['./src', './assets'],
-					extensions: ['.jsx', '.js', '.ios.js', '.android.js'],
+					extensions: ['.jsx', '.js', '.ios.js', '.android.js']
 				}
 			],
 			[
@@ -18,17 +18,17 @@ module.exports = function(api) {
 					rootPathSuffix
 				}
 			]
-		]
-  },
-  env: {
-    production: {
-      plugins: [
-        'babel-plugin-root-import',
-        {
-          rootPathPrefix,
-          rootPathSuffix
-        }
-      ]
-    }
+		],
+	  env: {
+	    production: {
+	      plugins: [
+	        'babel-plugin-root-import',
+	        {
+	          rootPathPrefix,
+	          rootPathSuffix
+	        }
+	      ]
+	    }
+	  }
   }
 };
