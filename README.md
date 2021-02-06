@@ -17,12 +17,12 @@ This project was attempt on incorporating multiple navigation/navigators in a si
 
 ## Screenshots
 <div style="display: flex">
+	<img width="320px" height="auto" src="./screenshots/clone (5).jpg"/>
+	<img width="320px" height="auto" src="./screenshots/clone (4).jpg"/>
+	<img width="320px" height="auto" src="./screenshots/clone (6).jpg"/>
 	<img width="320px" height="auto" src="./screenshots/clone (1).jpg"/>
 	<img width="320px" height="auto" src="./screenshots/clone (2).jpg"/>
 	<img width="320px" height="auto" src="./screenshots/clone (3).jpg"/>
-	<img width="320px" height="auto" src="./screenshots/clone (4).jpg"/>
-	<img width="320px" height="auto" src="./screenshots/clone (5).jpg"/>
-	<img width="320px" height="auto" src="./screenshots/clone (6).jpg"/>
 </div>
 
 ## [Demo](https://drive.google.com/file/d/1x1WzuFO-NOLg62tDIJ7LHLtcO5pzwYSW/view?usp=sharing)
