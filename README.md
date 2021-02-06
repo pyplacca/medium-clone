@@ -6,9 +6,9 @@ This project was attempt on incorporating multiple navigation/navigators in a si
 ## Project Makeup
 
 #### Navigation/Navigators
-- Stack
-- Material Bottom Tabs
-- Top Tabs
+- [Stack](https://reactnavigation.org/docs/stack-navigator)
+- [Material Bottom Tabs](https://reactnavigation.org/docs/material-bottom-tab-navigator)
+- [Material Top Tabs](https://reactnavigation.org/docs/material-top-tab-navigator)
 
 #### Theme
 - Dark Mode
@@ -16,11 +16,11 @@ This project was attempt on incorporating multiple navigation/navigators in a si
 
 
 ## Screenshots
-<img width="220" src="https://imgur.com/FkQLjdW"/>
-<img width="220" src="https://imgur.com/G09IJ7E"/>
-<img width="220" src="https://imgur.com/WxeHCoZ"/>
-<img width="220" src="https://imgur.com/TiVzqmh"/>
-<img width="220" src="https://imgur.com/OnVbiVg"/>
-<img width="220" src="https://imgur.com/ZPrcm8v"/>
+<img width="220px" height="auto" src="https://imgur.com/FkQLjdW"/>
+<img width="220px" height="auto" src="https://imgur.com/G09IJ7E"/>
+<img width="220px" height="auto" src="https://imgur.com/WxeHCoZ"/>
+<img width="220px" height="auto" src="https://imgur.com/TiVzqmh"/>
+<img width="220px" height="auto" src="https://imgur.com/OnVbiVg"/>
+<img width="220px" height="auto" src="https://imgur.com/ZPrcm8v"/>
 
 ## [Demo](https://drive.google.com/file/d/1x1WzuFO-NOLg62tDIJ7LHLtcO5pzwYSW/view?usp=sharing)
