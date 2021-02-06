@@ -11,7 +11,5 @@ This project was attempt on incorporating multiple navigation/navigators in a si
 - Top Tabs
 
 ##### Theme
-
-Dark Mode
-
-Light Mode
+- Dark Mode
+- Light Mode
